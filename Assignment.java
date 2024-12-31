@@ -1,10 +1,11 @@
-package Day_29_Handling_Alert;
+package Day_31_Dropdown_Handling;
 
 import java.time.Duration;
+import java.util.List;
 
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 public class Assignment {
@@ -12,25 +13,21 @@ public class Assignment {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		WebDriver driver=new ChromeDriver();
-		driver.get("https://mypage.rediff.com/login/dologin");
-		driver.manage().window().maximize();
+		
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+
+		driver.get("https://phppot.com/demo/jquery-dependent-dropdown-list-countries-and-states/");
 		
-		driver.findElement(By.xpath("//input[@type='submit']")).click();
-		Alert alert=driver.switchTo().alert();
+	List<WebElement> country_names=driver.findElements(By.id("country-list"));
+		System.out.println("Total number of countries are: "+country_names.size());
 		
-		String expsString="Please enter captcha";
-		String actualString=alert.getText();
+		System.out.println("Options in the list are: ");
 		
-		if (expsString.equals(actualString)) 
+		for(WebElement x:country_names)
 		{
-			System.out.println("Test Passed");
+			System.out.println(x.getText());
 		}
-		
-		alert.accept();
-		
-		driver.findElement(By.name("captcha")).sendKeys(""); 
-		
+		driver.manage().window().maximize();
 	}
 
 }
